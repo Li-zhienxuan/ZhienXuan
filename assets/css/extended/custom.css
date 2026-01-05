@@ -141,112 +141,81 @@ img {
 }
 
 /* 友链页面样式 */
-.friend-section {
-  margin-bottom: 50px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 18px;
-  align-items: flex-start;
-}
-
-.section-title {
-  font-size: 1.8rem;
-  margin-bottom: 20px;
-  color: var(--themecolor);
-  width: 100%;
-  position: relative;
-  padding-bottom: 10px;
-}
-
-.section-title::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 60px;
-  height: 4px;
-  background-color: var(--primary);
-  border-radius: 2px;
-}
-
-.friend-cards {
-  display: inline-grid;
-  grid-auto-flow: column;
-  grid-auto-columns: 320px;
-  gap: 18px;
-  align-items: start;
-  vertical-align: top;
-  min-width: 0;
+.friend-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
 }
 
 .friend-card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
   background: var(--card-bg, var(--entry-bg));
   border-radius: 12px;
-  padding: 16px;
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
   border: 1px solid var(--border-color);
-  text-decoration: none;
   overflow: hidden;
-  box-sizing: border-box;
-  height: auto;
-  width: 100%;
-  max-width: 320px;
-  break-inside: avoid;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .friend-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-4px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 
-.friend-header {
+.friend-card a {
   display: flex;
-  align-items: center;
+  padding: 20px;
+  text-decoration: none;
+  color: inherit;
   gap: 15px;
 }
 
 .friend-avatar {
-  width: 54px;
-  height: 54px;
-  border-radius: 12px;
+  flex-shrink: 0;
+  width: 80px;
+  height: 80px;
+}
+
+.friend-avatar img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+  border-radius: 10px;
   transition: transform 0.3s ease;
 }
 
-.friend-card:hover .friend-avatar {
-  transform: scale(1.1);
+.friend-card:hover .friend-avatar img {
+  transform: scale(1.05);
 }
 
-.friend-info {
+.friend-content {
   flex: 1;
   min-width: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .friend-name {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: 600;
   color: var(--text-color);
   margin-bottom: 4px;
-}
-
-.friend-link {
-  font-size: 0.85rem;
-  color: var(--primary);
-  opacity: 0.8;
-  display: block;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  line-height: 1.3;
 }
 
 .friend-desc {
-  margin-top: 12px;
+  font-size: 0.85rem;
+  color: var(--primary);
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.friend-detail {
   font-size: 0.9rem;
   color: var(--text-color);
   opacity: 0.8;
+  margin-bottom: 12px;
+  line-height: 1.4;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -255,19 +224,24 @@ img {
 }
 
 .friend-tags {
-  margin-top: 12px;
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
+  margin-top: auto;
 }
 
 .friend-tag {
-  padding: 3px 8px;
+  padding: 4px 10px;
   font-size: 0.75rem;
   border-radius: 6px;
   background: var(--bg, var(--code-bg));
   color: var(--text-color);
   opacity: 0.8;
+  transition: all 0.2s ease;
+}
+
+.friend-card:hover .friend-tag {
+  opacity: 1;
 }
 
 /* 申请友链部分 */
@@ -363,28 +337,29 @@ img {
 }
 
 /* 响应式设计 */
-@media (max-width: 1400px) {
-  .friend-cards {
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  }
-}
-
 @media (max-width: 1024px) {
-  .friend-section {
-    display: block;
-  }
-
-  .friend-cards {
-    display: grid;
-    grid-auto-flow: row;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    width: 100%;
+  .friend-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 15px;
   }
 }
 
 @media (max-width: 768px) {
-  .friend-cards {
+  .friend-grid {
     grid-template-columns: 1fr;
+  }
+
+  .friend-card a {
+    padding: 15px;
+  }
+
+  .friend-avatar {
+    width: 70px;
+    height: 70px;
+  }
+
+  .friend-name {
+    font-size: 1.1rem;
   }
 
   .tabs {
