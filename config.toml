@@ -1,0 +1,158 @@
+baseURL = "https://yourdomain.com"
+languageCode = "zh-CN"
+defaultContentLanguage = "zh"
+theme = "PaperMod"
+pluralizeListTitles = false
+[pagination]
+  pagerSize = 10
+
+# 网站信息
+title = "ZhienXuan的个人站"
+author = "ZhienXuan"
+description = "专注于技术文章与知识沉淀"
+keywords = ["技术", "博客", "编程", "开发", "架构"]
+
+# 多语言
+[languages.zh]
+  languageName = "中文"
+  weight = 1
+  languagedirection = "ltr"
+
+[languages.en]
+  languageName = "English"
+  weight = 2
+  languagedirection = "ltr"
+
+# 菜单
+[[menu.main]]
+  identifier = "home"
+  name = "首页"
+  url = "/"
+  weight = 1
+
+[[menu.main]]
+  identifier = "posts"
+  name = "文章"
+  url = "/posts/"
+  weight = 2
+
+[[menu.main]]
+  identifier = "categories"
+  name = "分类"
+  url = "/categories/"
+  weight = 3
+
+[[menu.main]]
+  identifier = "tags"
+  name = "标签"
+  url = "/tags/"
+  weight = 4
+
+[[menu.main]]
+  identifier = "about"
+  name = "关于"
+  url = "/about/"
+  weight = 5
+
+# 参数
+[params]
+  defaultTheme = "auto"
+  ShowReadingTime = true
+  ShowShareButtons = true
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = true
+  ShowWordCount = true
+  ShowRssButtonInSectionTermList = true
+  UseHugoToc = true
+  disableSpecial1stPost = false
+  disableScrollToTop = false
+  comments = true
+  hidemeta = false
+  hideSummary = false
+  showtoc = true
+  tocopen = false
+
+  # 主页信息
+  mainSections = ["posts"]
+
+  # 社交图标
+  socialIcons = [
+    {name = "github", url = "https://github.com/https://github.com/Li-zhienxuan"},
+    {name = "cnb", url = "https://cnb.cool/u/cnb.Hajimi"},
+    {name = "email", url = "mailto:hajimi.china@gmail.com"}
+  ]
+
+  # 首页信息模式
+  [params.homeInfoParams]
+    Title = "你好 👋"
+    Content = """
+      欢迎来到我的技术博客，这里是哈基米的个人站，分享技术，热爱生活。
+      """
+
+  # Fuse.js 搜索配置（本地搜索，无外部依赖）
+  [params.fuseOpts]
+    isCaseSensitive = false
+    shouldSort = true
+    minMatchCharLength = 2
+    limit = 10
+    keys = ["title", "permalink", "summary", "content"]
+
+  # Giscus 评论系统配置
+  # 访问 https://github.com/apps/giscus 获取配置参数
+  [params.giscus]
+    repo = "yourusername/yourrepo"
+    repoId = "your-repo-id"
+    category = "Announcements"
+    categoryId = "your-category-id"
+    theme = "preferred_color_scheme"
+    mapping = "pathname"
+    reactionsEnabled = 1
+    emitMetadata = 0
+
+  # Google Analytics（可选）
+  [params.analytics.google]
+    SiteVerificationTag = "your-google-analytics-id"
+
+  # 百度统计（可选）
+  [params.analytics.baidu]
+    SiteVerificationTag = "your-baidu-tongji-id"
+
+# 输出配置（启用搜索索引）
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+  section = ["HTML", "RSS"]
+
+# 分类法
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+  series = "series"
+
+# Markdown 配置
+[markup]
+  defaultMarkdownHandler = "goldmark"
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true  # 允许 HTML 标签
+  [markup.highlight]
+    noClasses = false
+    lineNos = false
+    style = "monokai"
+  [markup.tableOfContents]
+    startLevel = 1
+    endLevel = 3
+    ordered = false
+
+# Sitemap
+[sitemap]
+  changefreq = "weekly"
+  filename = "sitemap.xml"
+  priority = 0.5
+
+# 隐私配置
+[privacy]
+  [privacy.googleAnalytics]
+    respectDoNotTrack = true
+  [privacy.x]
+    enableDNT = true

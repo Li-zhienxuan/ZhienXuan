@@ -1,0 +1,141 @@
+/* 自定义样式 */
+
+/* 全局样式优化 */
+body {
+  line-height: 1.8;
+}
+
+/* 代码块优化 */
+pre {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+code {
+  padding: 0.2em 0.4em;
+  margin: 0;
+  font-size: 85%;
+  background-color: rgba(27, 31, 35, 0.05);
+  border-radius: 3px;
+}
+
+/* 链接样式 */
+a {
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* 卡片阴影优化 */
+.post-entry {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.post-entry:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* 列表样式优化 */
+.post-content ul,
+.post-content ol {
+  padding-left: 2em;
+}
+
+.post-content li {
+  margin-bottom: 0.5em;
+}
+
+/* 引用样式 */
+blockquote {
+  border-left: 4px solid #3498db;
+  padding-left: 1em;
+  margin-left: 0;
+  color: #555;
+  font-style: italic;
+}
+
+/* 表格样式 */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1em 0;
+}
+
+table th,
+table td {
+  border: 1px solid #ddd;
+  padding: 0.75em;
+}
+
+table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+/* 响应式图片 */
+img {
+  border-radius: 4px;
+}
+
+/* 搜索框优化 */
+.search-input {
+  padding: 0.5em 1em;
+  border: 2px solid #ddd;
+  border-radius: 20px;
+  width: 100%;
+  font-size: 1em;
+  transition: border-color 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+/* 顶部导航优化 */
+.top-nav {
+  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+/* 暗色模式 */
+@media (prefers-color-scheme: dark) {
+  .top-nav {
+    background-color: rgba(26, 26, 26, 0.9);
+  }
+
+  code {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  table th {
+    background-color: #333;
+  }
+
+  table th,
+  table td {
+    border-color: #444;
+  }
+}
+
+/* 打印样式优化 */
+@media print {
+  .top-nav,
+  .post-meta,
+  .share-buttons,
+  #comments {
+    display: none;
+  }
+
+  body {
+    font-size: 12pt;
+  }
+
+  a {
+    color: #000;
+  }
+}

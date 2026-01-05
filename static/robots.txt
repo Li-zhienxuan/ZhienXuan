@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# 禁止爬取特定目录
+Disallow: /tags/
+Disallow: /categories/
+Disallow: /series/
+
+# Sitemap
+Sitemap: https://yourdomain.com/sitemap.xml

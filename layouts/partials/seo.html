@@ -1,0 +1,31 @@
+<!-- SEO Meta 标签 -->
+<meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+<meta name="keywords" content="{{ delimit .Site.Params.keywords ", " }}">
+<meta name="author" content="{{ .Site.Author.name }}">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:title" content="{{ .Title }}">
+<meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+<meta property="og:image" content="{{ .Site.Params.ogImage | default "images/og-image.png" | absURL }}">
+<meta property="og:site_name" content="{{ .Site.Title }}">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="{{ .Permalink }}">
+<meta name="twitter:title" content="{{ .Title }}">
+<meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+<meta name="twitter:image" content="{{ .Site.Params.ogImage | default "images/og-image.png" | absURL }}">
+
+<!-- 验证码 -->
+{{ with .Site.Params.analytics.google.SiteVerificationTag }}
+<meta name="google-site-verification" content="{{ . }}">
+{{ end }}
+
+{{ with .Site.Params.analytics.baidu.SiteVerificationTag }}
+<meta name="baidu-site-verification" content="{{ . }}">
+{{ end }}
+
+<!-- Canonical URL -->
+<link rel="canonical" href="{{ .Permalink }}">
