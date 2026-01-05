@@ -8,16 +8,43 @@ description: "我的朋友们"
 <div class="info-bar">
     <div class="info-item">
         <span class="info-icon">📅</span>
-        <span id="current-time">正在加载时间...</span>
+        <span id="current-time">加载中...</span>
     </div>
 
     <div class="info-item weather-info">
         <span class="info-icon">🌤️</span>
-        <span id="weather-location">正在获取位置...</span>
+        <span id="weather-location">定位中...</span>
         <span id="weather-temp">--°C</span>
-        <span id="visitor-ip" class="ip-display">IP: —</span>
+        <span id="visitor-ip" class="ip-display">IP: 检测中</span>
     </div>
 </div>
+
+<script>
+(function() {
+    'use strict';
+    const pad = n => String(n).padStart(2, '0');
+    const weekdays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+
+    function updateClock() {
+        const d = new Date();
+        const year = d.getFullYear();
+        const month = pad(d.getMonth() + 1);
+        const day = pad(d.getDate());
+        const weekday = weekdays[d.getDay()];
+        const hour = pad(d.getHours());
+        const minute = pad(d.getMinutes());
+        const second = pad(d.getSeconds());
+
+        const el = document.getElementById('current-time');
+        if (el) {
+            el.textContent = `${year}-${month}-${day} ${weekday} ${hour}:${minute}:${second}`;
+        }
+    }
+
+    updateClock();
+    setInterval(updateClock, 1000);
+})();
+</script>
 
 <style>
 .info-bar {
@@ -86,7 +113,7 @@ description: "我的朋友们"
 <div class="flink-list-item">
     <a href="https://blog.811311.xyz/" title="白夭夭" target="_blank" rel="noopener noreferrer">
         <div class="flink-item-icon">
-            <img src="https://q2.qlogo.cn/headimg_dl?dst_uin=2739043475&spec=5" alt="白夭夭" loading="lazy">
+            <img src="https://q2.qlogo.cn/headimg_dl?dst_uin=2739043475&spec=5" alt="白夭夭" onerror="this.src='https://via.placeholder.com/100'" loading="lazy">
         </div>
         <div class="flink-item-name">白夭夭</div>
         <div class="flink-item-desc" title="夭夭随笔，选择性失忆综合症">夭夭随笔，选择性失忆综合症</div>
@@ -96,7 +123,7 @@ description: "我的朋友们"
 <div class="flink-list-item">
     <a href="https://blog.hslzz.cn/" title="花生莲子粥" target="_blank" rel="noopener noreferrer">
         <div class="flink-item-icon">
-            <img src="https://hslzz.cn/assets/img/favicon.png" alt="花生莲子粥" loading="lazy">
+            <img src="https://hslzz.cn/assets/img/favicon.png" alt="花生莲子粥" onerror="this.src='https://via.placeholder.com/100'" loading="lazy">
         </div>
         <div class="flink-item-name">花生莲子粥</div>
         <div class="flink-item-desc" title="与世无争，不染于泥">与世无争，不染于泥</div>
@@ -106,7 +133,7 @@ description: "我的朋友们"
 <div class="flink-list-item">
     <a href="https://www.feiyun123.cn/" title="清羽飞扬" target="_blank" rel="noopener noreferrer">
         <div class="flink-item-icon">
-            <img src="https://www.feiyun123.cn/avatar.png" alt="清羽飞扬" loading="lazy">
+            <img src="https://www.feiyun123.cn/avatar.png" alt="清羽飞扬" onerror="this.src='https://via.placeholder.com/100'" loading="lazy">
         </div>
         <div class="flink-item-name">清羽飞扬</div>
         <div class="flink-item-desc" title="柳影曳曳，清酒孤灯 扬笔撒墨，心境如霜">柳影曳曳，清酒孤灯 扬笔撒墨，心境如霜</div>
@@ -116,7 +143,7 @@ description: "我的朋友们"
 <div class="flink-list-item">
     <a href="https://www.emulatedlab.cn/" title="EmulatedLab 论坛" target="_blank" rel="noopener noreferrer">
         <div class="flink-item-icon">
-            <img src="https://www.emulatedlab.cn/wp-content/uploads/2023/01/cropped-EmulatedLab-Logo-1-32x32.png" alt="EmulatedLab" loading="lazy">
+            <img src="https://www.emulatedlab.cn/wp-content/uploads/2023/01/cropped-EmulatedLab-Logo-1-32x32.png" alt="EmulatedLab" onerror="this.src='https://via.placeholder.com/100'" loading="lazy">
         </div>
         <div class="flink-item-name">EmulatedLab 论坛</div>
         <div class="flink-item-desc" title="EVE-NG中文区独家官方合作伙伴">EVE-NG中文区独家官方合作伙伴</div>
@@ -126,7 +153,7 @@ description: "我的朋友们"
 <div class="flink-list-item">
     <a href="https://space.bilibili.com/3546554881280375" title="桃木雨" target="_blank" rel="noopener noreferrer">
         <div class="flink-item-icon">
-            <img src="/images/taomuyu.jpg" alt="桃木雨" loading="lazy">
+            <img src="/images/taomuyu.jpg" alt="桃木雨" onerror="this.src='https://via.placeholder.com/100'" loading="lazy">
         </div>
         <div class="flink-item-name">桃木雨</div>
         <div class="flink-item-desc" title="我的被子生病了，我要在床上照顾它">我的被子生病了，我要在床上照顾它</div>
@@ -136,7 +163,7 @@ description: "我的朋友们"
 <div class="flink-list-item">
     <a href="https://space.bilibili.com/1164913332" title="梨子Light" target="_blank" rel="noopener noreferrer">
         <div class="flink-item-icon">
-            <img src="/images/xiaomei.jpg" alt="梨子Light" loading="lazy">
+            <img src="/images/xiaomei.jpg" alt="梨子Light" onerror="this.src='https://via.placeholder.com/100'" loading="lazy">
         </div>
         <div class="flink-item-name">梨子Light</div>
         <div class="flink-item-desc" title="日常乱唱ing">日常乱唱ing</div>
@@ -146,7 +173,7 @@ description: "我的朋友们"
 <div class="flink-list-item">
     <a href="https://blog.ytblog.top/" title="江浙沪第一甜妹" target="_blank" rel="noopener noreferrer">
         <div class="flink-item-icon">
-            <img src="https://blog.ytblog.top/wp-content/uploads/2024/12/cropped-20241219102549622-32x32.jpg" alt="江浙沪第一甜妹" loading="lazy">
+            <img src="https://blog.ytblog.top/wp-content/uploads/2024/12/cropped-20241219102549622-32x32.jpg" alt="江浙沪第一甜妹" onerror="this.src='https://via.placeholder.com/100'" loading="lazy">
         </div>
         <div class="flink-item-name">江浙沪第一甜妹</div>
         <div class="flink-item-desc" title="执笔写诗，落墨成画，在字里行间寻找生活的诗意">执笔写诗，落墨成画，在字里行间寻找生活的诗意</div>
@@ -164,7 +191,7 @@ description: "我的朋友们"
 <div class="flink-list-item">
     <a href="https://webui.nbgui.top/" title="NoneBot WebUI" target="_blank" rel="noopener noreferrer">
         <div class="flink-item-icon">
-            <img src="https://webui.nbgui.top/logo.png" alt="NoneBot WebUI" loading="lazy">
+            <img src="https://webui.nbgui.top/logo.png" alt="NoneBot WebUI" onerror="this.src='https://via.placeholder.com/100'" loading="lazy">
         </div>
         <div class="flink-item-name">NoneBot WebUI</div>
         <div class="flink-item-desc" title="新一代 NoneBot Web 管理界面">新一代 NoneBot Web 管理界面</div>
@@ -174,7 +201,7 @@ description: "我的朋友们"
 <div class="flink-list-item">
     <a href="https://www.495000.xyz" title="Jack" target="_blank" rel="noopener noreferrer">
         <div class="flink-item-icon">
-            <img src="/images/zhazhahui.jpg" alt="Jack" loading="lazy">
+            <img src="/images/zhazhahui.jpg" alt="Jack" onerror="this.src='https://via.placeholder.com/100'" loading="lazy">
         </div>
         <div class="flink-item-name">Jack</div>
         <div class="flink-item-desc" title="小时有一个梦想，成为一个公益的人">小时有一个梦想，成为一个公益的人</div>
