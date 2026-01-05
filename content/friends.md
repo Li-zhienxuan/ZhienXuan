@@ -5,104 +5,7 @@ draft: false
 description: "我的朋友们"
 ---
 
-<div class="info-bar">
-    <div class="info-item">
-        <span class="info-icon">📅</span>
-        <span id="current-time">加载中...</span>
-    </div>
-
-    <div class="info-item weather-info">
-        <span class="info-icon">🌤️</span>
-        <span id="weather-location">定位中...</span>
-        <span id="weather-temp">--°C</span>
-        <span id="visitor-ip" class="ip-display">IP: 检测中</span>
-    </div>
-</div>
-
-<script>
-(function() {
-    'use strict';
-    const pad = n => String(n).padStart(2, '0');
-    const weekdays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
-
-    function updateClock() {
-        const d = new Date();
-        const year = d.getFullYear();
-        const month = pad(d.getMonth() + 1);
-        const day = pad(d.getDate());
-        const weekday = weekdays[d.getDay()];
-        const hour = pad(d.getHours());
-        const minute = pad(d.getMinutes());
-        const second = pad(d.getSeconds());
-
-        const el = document.getElementById('current-time');
-        if (el) {
-            el.textContent = `${year}-${month}-${day} ${weekday} ${hour}:${minute}:${second}`;
-        }
-    }
-
-    updateClock();
-    setInterval(updateClock, 1000);
-})();
-</script>
-
-<style>
-.info-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 15px;
-    padding: 15px 20px;
-    margin-bottom: 30px;
-    background: var(--card-bg, var(--entry-bg));
-    border-radius: 12px;
-    border: 1px solid var(--border-color);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-.info-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.9rem;
-    color: var(--text-color);
-}
-
-.info-icon {
-    font-size: 1.2rem;
-    line-height: 1;
-}
-
-.weather-info {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.ip-display {
-    font-size: 0.75rem;
-    color: #7f8c8d;
-    padding-left: 12px;
-    border-left: 1px solid var(--border-color);
-}
-
-@media (max-width: 768px) {
-    .info-bar {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .weather-info {
-        flex-wrap: wrap;
-    }
-
-    .ip-display {
-        border-left: none;
-        padding-left: 0;
-    }
-}
-</style>
+{{< friends_header >}}
 
 ## 推荐友链
 
@@ -255,3 +158,24 @@ description: "我的朋友们"
         sublink: 副标题文本
     </div>
 </div>
+
+<script>
+(function() {
+    'use strict';
+
+    const tabs = document.querySelectorAll('.tab');
+    const contents = document.querySelectorAll('.tab-content');
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            const targetId = this.getAttribute('data-tab');
+
+            tabs.forEach(t => t.classList.remove('active'));
+            contents.forEach(c => c.classList.remove('active'));
+
+            this.classList.add('active');
+            document.getElementById(targetId).classList.add('active');
+        });
+    });
+})();
+</script>

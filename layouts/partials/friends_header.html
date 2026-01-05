@@ -1,0 +1,260 @@
+<div class="info-bar">
+    <div class="info-item">
+        <span class="info-icon">📅</span>
+        <span id="current-time">加载中...</span>
+    </div>
+
+    <div class="info-item weather-info">
+        <span class="info-icon" id="weather-icon">🌤️</span>
+        <div class="weather-details">
+            <span id="weather-location">定位中...</span>
+            <span id="weather-desc"></span>
+            <span id="weather-temp">--°C</span>
+            <span id="visitor-ip" class="ip-display">IP: 检测中</span>
+        </div>
+    </div>
+</div>
+
+<script>
+(function() {
+    'use strict';
+    const pad = n => String(n).padStart(2, '0');
+    const weekdays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+
+    function updateClock() {
+        const d = new Date();
+        const year = d.getFullYear();
+        const month = pad(d.getMonth() + 1);
+        const day = pad(d.getDate());
+        const weekday = weekdays[d.getDay()];
+        const hour = pad(d.getHours());
+        const minute = pad(d.getMinutes());
+        const second = pad(d.getSeconds());
+
+        const el = document.getElementById('current-time');
+        if (el) {
+            el.textContent = `${year}-${month}-${day} ${weekday} ${hour}:${minute}:${second}`;
+        }
+    }
+
+    updateClock();
+    setInterval(updateClock, 1000);
+})();
+</script>
+
+<script>
+(function() {
+    'use strict';
+
+    const ipEl = document.getElementById('visitor-ip');
+    const locEl = document.getElementById('weather-location');
+    const tempEl = document.getElementById('weather-temp');
+    const descEl = document.getElementById('weather-desc');
+    const iconEl = document.getElementById('weather-icon');
+
+    if (!ipEl && !locEl && !tempEl && !descEl && !iconEl) {
+        return;
+    }
+
+    const timeout = (ms) => new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), ms));
+    const fetchJSON = (url, ms = 6000) => Promise.race([
+        fetch(url).then(r => r.ok ? r.json() : Promise.reject(r)),
+        timeout(ms)
+    ]);
+
+    function weatherCodeToText(code) {
+        if (code === 0) return '晴朗';
+        if (code <= 3) return '多云';
+        if (code === 45 || code === 48) return '雾';
+        if (code >= 51 && code <= 67) return '小雨';
+        if (code >= 71 && code <= 77) return '小雪';
+        if (code >= 80 && code <= 82) return '阵雨';
+        if (code >= 95) return '雷暴';
+        return '多变';
+    }
+
+    function weatherCodeToEmoji(code) {
+        if (code === 0) return '☀️';
+        if (code <= 3) return '⛅';
+        if (code === 45 || code === 48) return '🌫️';
+        if (code >= 51 && code <= 67) return '🌧️';
+        if (code >= 71 && code <= 77) return '❄️';
+        if (code >= 80 && code <= 82) return '🌦️';
+        if (code >= 95) return '⚡';
+        return '🌤️';
+    }
+
+    async function getIpData() {
+        const services = [
+            'https://ipapi.co/json/',
+            'https://ipwho.is/json/'
+        ];
+
+        for (const url of services) {
+            try {
+                const d = await fetchJSON(url, 6000);
+                if (d && (d.ip || d.success === true || d.ip_address)) {
+                    return d;
+                }
+            } catch (e) {
+                console.warn(`IP service ${url} failed`);
+            }
+        }
+        return null;
+    }
+
+    async function getCoordsViaGeolocation() {
+        if (!navigator.geolocation) {
+            return null;
+        }
+
+        return new Promise((resolve) => {
+            const done = (pos) => resolve({
+                latitude: pos.coords.latitude,
+                longitude: pos.coords.longitude
+            });
+            const fail = () => resolve(null);
+            navigator.geolocation.getCurrentPosition(done, fail, {
+                maximumAge: 600000,
+                timeout: 8000
+            });
+        });
+    }
+
+    async function init() {
+        try {
+            const data = await getIpData();
+            let lat = null, lon = null;
+
+            if (data) {
+                const ip = data.ip || data.ip_address || '—';
+                if (ipEl) ipEl.textContent = `IP: ${ip}`;
+
+                const city = data.city || '';
+                const region = data.region || data.regionName || '';
+                const country = data.country_name || data.country || data.countryCode || '';
+                if (locEl) {
+                    locEl.textContent = [city, region, country].filter(Boolean).join(' · ') || '未知位置';
+                }
+
+                lat = data.latitude ?? data.lat;
+                lon = data.longitude ?? data.lon;
+            } else {
+                if (ipEl) ipEl.textContent = 'IP: 无法获取';
+                if (locEl) locEl.textContent = '定位中…';
+            }
+
+            if (lat == null || lon == null) {
+                const geo = await getCoordsViaGeolocation();
+                if (geo) {
+                    lat = geo.latitude;
+                    lon = geo.longitude;
+                    if (locEl && (!locEl.textContent || locEl.textContent === '定位中…')) {
+                        locEl.textContent = '浏览器定位';
+                    }
+                }
+            }
+
+            if (lat != null && lon != null) {
+                const url = `https://api.open-meteo.com/v1/forecast?latitude=${encodeURIComponent(lat)}&longitude=${encodeURIComponent(lon)}&current_weather=true&timezone=auto`;
+
+                try {
+                    const w = await fetchJSON(url, 7000);
+                    const cw = w.current_weather || {};
+                    const temp = cw.temperature;
+                    const code = cw.weathercode;
+                    const wind = cw.windspeed;
+
+                    if (tempEl) tempEl.textContent = (temp != null) ? `${Number(temp).toFixed(1)}°C` : '--°C';
+                    if (descEl) descEl.textContent = `${weatherCodeToText(code)} · 风 ${wind ?? '--'} km/h`;
+                    if (iconEl) iconEl.textContent = weatherCodeToEmoji(code);
+                } catch (e) {
+                    console.error('Weather API failed', e);
+                    if (descEl) descEl.textContent = '天气服务不可用';
+                }
+            } else {
+                if (descEl) descEl.textContent = '无法定位';
+                if (tempEl) tempEl.textContent = '--°C';
+                if (iconEl) iconEl.textContent = '—';
+            }
+        } catch (e) {
+            console.error('Weather init failed', e);
+            if (ipEl) ipEl.textContent = 'IP: 无法获取';
+            if (locEl) locEl.textContent = '未知位置';
+            if (descEl) descEl.textContent = '天气服务不可用';
+        }
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();
+</script>
+
+<style>
+.info-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 15px 20px;
+    margin-bottom: 30px;
+    background: var(--card-bg, var(--entry-bg));
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    color: var(--text-color);
+}
+
+.info-icon {
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+.weather-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.weather-details {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.ip-display {
+    font-size: 0.75rem;
+    color: #7f8c8d;
+    padding-left: 12px;
+    border-left: 1px solid var(--border-color);
+}
+
+@media (max-width: 768px) {
+    .info-bar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .weather-info {
+        flex-wrap: wrap;
+    }
+
+    .ip-display {
+        border-left: none;
+        padding-left: 0;
+    }
+}
+</style>
