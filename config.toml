@@ -49,10 +49,16 @@ keywords = ["技术", "博客", "编程", "开发", "架构"]
   weight = 4
 
 [[menu.main]]
+  identifier = "friends"
+  name = "友链"
+  url = "/friends/"
+  weight = 5
+
+[[menu.main]]
   identifier = "about"
   name = "关于"
   url = "/about/"
-  weight = 5
+  weight = 6
 
 # 参数
 [params]

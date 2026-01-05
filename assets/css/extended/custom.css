@@ -139,3 +139,260 @@ img {
     color: #000;
   }
 }
+
+/* 友链页面样式 */
+.friend-section {
+  margin-bottom: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  align-items: flex-start;
+}
+
+.section-title {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: var(--themecolor);
+  width: 100%;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background-color: var(--primary);
+  border-radius: 2px;
+}
+
+.friend-cards {
+  display: inline-grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 320px;
+  gap: 18px;
+  align-items: start;
+  vertical-align: top;
+  min-width: 0;
+}
+
+.friend-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--card-bg, var(--entry-bg));
+  border-radius: 12px;
+  padding: 16px;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  border: 1px solid var(--border-color);
+  text-decoration: none;
+  overflow: hidden;
+  box-sizing: border-box;
+  height: auto;
+  width: 100%;
+  max-width: 320px;
+  break-inside: avoid;
+}
+
+.friend-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.friend-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.friend-avatar {
+  width: 54px;
+  height: 54px;
+  border-radius: 12px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.friend-card:hover .friend-avatar {
+  transform: scale(1.1);
+}
+
+.friend-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.friend-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 4px;
+}
+
+.friend-link {
+  font-size: 0.85rem;
+  color: var(--primary);
+  opacity: 0.8;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.friend-desc {
+  margin-top: 12px;
+  font-size: 0.9rem;
+  color: var(--text-color);
+  opacity: 0.8;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.friend-tags {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.friend-tag {
+  padding: 3px 8px;
+  font-size: 0.75rem;
+  border-radius: 6px;
+  background: var(--bg, var(--code-bg));
+  color: var(--text-color);
+  opacity: 0.8;
+}
+
+/* 申请友链部分 */
+.apply-section {
+  margin-top: 50px;
+  padding-top: 30px;
+  border-top: 1px solid var(--border-color);
+}
+
+.tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 20px;
+  gap: 10px;
+}
+
+.tab {
+  padding: 12px 25px;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s;
+  color: var(--text-color);
+  background: none;
+  border: none;
+  font-size: 1rem;
+}
+
+.tab:hover {
+  color: var(--primary);
+}
+
+.tab.active {
+  border-bottom: 2px solid var(--primary);
+  color: var(--primary);
+}
+
+.tab-content {
+  display: none;
+  padding: 20px 0;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.blog-info {
+  background-color: rgba(52, 152, 219, 0.1);
+  border-radius: 8px;
+  padding: 25px;
+  margin-bottom: 20px;
+}
+
+.info-title {
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: var(--primary);
+  font-size: 1.2rem;
+}
+
+.info-item {
+  margin-bottom: 10px;
+  display: flex;
+}
+
+.info-label {
+  min-width: 80px;
+  font-weight: 500;
+}
+
+.requirements {
+  margin-bottom: 20px;
+}
+
+.requirement-list {
+  padding-left: 20px;
+  margin: 20px 0;
+}
+
+.requirement-list li {
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+.code-block {
+  background-color: var(--code-bg);
+  color: var(--code-color);
+  padding: 20px;
+  border-radius: 8px;
+  font-family: 'Courier New', monospace;
+  overflow-x: auto;
+  margin: 20px 0;
+  line-height: 1.5;
+}
+
+/* 响应式设计 */
+@media (max-width: 1400px) {
+  .friend-cards {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}
+
+@media (max-width: 1024px) {
+  .friend-section {
+    display: block;
+  }
+
+  .friend-cards {
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .friend-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .tabs {
+    flex-wrap: wrap;
+  }
+
+  .tab {
+    padding: 10px 15px;
+    font-size: 0.9rem;
+  }
+}

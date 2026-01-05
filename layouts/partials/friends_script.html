@@ -1,0 +1,30 @@
+{{ if or .IsPage .IsHome }}
+<script>
+    // 友链页面选项卡功能
+    (function() {
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        if (tabs.length === 0 || tabContents.length === 0) {
+            return;
+        }
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                const tabId = this.getAttribute('data-tab');
+
+                // 移除所有 active 类
+                tabs.forEach(t => t.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+
+                // 添加 active 类到当前选中的标签
+                this.classList.add('active');
+                const targetContent = document.getElementById(tabId);
+                if (targetContent) {
+                    targetContent.classList.add('active');
+                }
+            });
+        });
+    })();
+</script>
+{{ end }}
