@@ -134,7 +134,7 @@ description: "我的朋友们"
             </div>
             <div class="info-item">
                 <span class="info-label">地址：</span>
-                <span><a href="https://lilyxuan.online" target="_blank">https://lilyxuan.online</a></span>
+                <span><a href="https://blog.zhienxuan.com" target="_blank">https://blog.zhienxuan.com</a></span>
             </div>
             <div class="info-item">
                 <span class="info-label">描述：</span>

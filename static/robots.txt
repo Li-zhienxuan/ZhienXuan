@@ -7,4 +7,4 @@ Disallow: /categories/
 Disallow: /series/
 
 # Sitemap
-Sitemap: https://yourdomain.com/sitemap.xml
+Sitemap: https://blog.zhienxuan.com/sitemap.xml
