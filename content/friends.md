@@ -10,8 +10,7 @@ description: "我的朋友们"
     <div class="friend-cards">
         <a class="friend-card" href="https://blog.811311.xyz/" target="_blank" rel="noopener noreferrer">
             <div class="friend-header">
-                <img src="https://q2.qlogo.cn/headimg_dl?dst_uin=2739043475&spec=5" alt="白夭夭"
-                    class="friend-avatar">
+                <img src="https://q2.qlogo.cn/headimg_dl?dst_uin=2739043475&spec=5" alt="白夭夭" class="friend-avatar">
                 <div class="friend-info">
                     <h3 class="friend-name">白夭夭</h3>
                     <span class="friend-link">夭夭的博客</span>
@@ -24,9 +23,7 @@ description: "我的朋友们"
                 <span class="friend-tag">夭夭回忆录</span>
             </div>
         </a>
-    </div>
 
-    <div class="friend-cards" style="margin-top:18px">
         <a class="friend-card" href="https://blog.hslzz.cn/" target="_blank" rel="noopener noreferrer">
             <div class="friend-header">
                 <img src="https://hslzz.cn/assets/img/favicon.png" alt="花生莲子粥" class="friend-avatar">
@@ -42,11 +39,8 @@ description: "我的朋友们"
                 <span class="friend-tag">Ubuntu</span>
             </div>
         </a>
-    </div>
 
-    <div class="friend-cards" style="margin-top:18px">
-        <a class="friend-card" href="https://space.bilibili.com/3546554881280375" target="_blank"
-            rel="noopener noreferrer">
+        <a class="friend-card" href="https://space.bilibili.com/3546554881280375" target="_blank" rel="noopener noreferrer">
             <div class="friend-header">
                 <img src="/images/taomuyu.jpg" alt="桃木雨" class="friend-avatar">
                 <div class="friend-info">
@@ -62,11 +56,8 @@ description: "我的朋友们"
                 <span class="friend-tag">Bilibili UP</span>
             </div>
         </a>
-    </div>
 
-    <div class="friend-cards" style="margin-top:18px">
-        <a class="friend-card" href="https://space.bilibili.com/1164913332" target="_blank"
-            rel="noopener noreferrer">
+        <a class="friend-card" href="https://space.bilibili.com/1164913332" target="_blank" rel="noopener noreferrer">
             <div class="friend-header">
                 <img src="/images/xiaomei.jpg" alt="梨子Light" class="friend-avatar">
                 <div class="friend-info">
@@ -103,15 +94,13 @@ description: "我的朋友们"
                 <span class="friend-tag">[夜风] NightWind</span>
             </div>
         </a>
-    </div>
 
-    <div class="friend-cards" style="margin-top:18px">
         <a class="friend-card" href="https://www.495000.xyz" target="_blank" rel="noopener noreferrer">
             <div class="friend-header">
                 <img src="/images/zhazhahui.jpg" alt="Jack" class="friend-avatar">
                 <div class="friend-info">
                     <h3 class="friend-name">Jack</h3>
-                    <span class="friend-link">好巧，你如果你需要公益服玩游戏，如果你需要学技术，那你真是太有眼光了 谁想我加入我们</span>
+                    <span class="friend-link">好巧，你如果你需要公益服玩游戏，如果你需要学技术，那你真是太有眼光了</span>
                 </div>
             </div>
             <p class="friend-desc">小时有一个梦想，成为一个公益的人</p>

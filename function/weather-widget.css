@@ -1,0 +1,75 @@
+/**
+ * 天气小部件样式
+ *
+ * 使用方法：
+ * 在 HTML <head> 中引入：
+ * <link rel="stylesheet" href="/function/weather-widget.css">
+ */
+
+.weather-widget {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px;
+    border-radius: 10px;
+    background-color: var(--card-bg, #ffffff);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--border-color, #eaeaea);
+    font-size: 0.95rem;
+}
+
+.weather-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.weather-icon {
+    font-size: 1.6rem;
+    line-height: 1;
+}
+
+.weather-location {
+    font-weight: 600;
+    color: var(--text-color, #333333);
+}
+
+.weather-temp {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--primary, #3498db);
+}
+
+.weather-note {
+    color: #7f8c8d;
+    font-size: 0.85rem;
+}
+
+/* 暗色模式适配 */
+@media (prefers-color-scheme: dark) {
+    .weather-widget {
+        background-color: var(--card-bg, #2d2d2d);
+        border-color: var(--border-color, #444444);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .weather-location {
+        color: var(--text-color, #e0e0e0);
+    }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .weather-widget {
+        padding: 12px;
+        font-size: 0.9rem;
+    }
+
+    .weather-icon {
+        font-size: 1.4rem;
+    }
+
+    .weather-temp {
+        font-size: 1.2rem;
+    }
+}
