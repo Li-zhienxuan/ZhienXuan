@@ -1,3 +1,12 @@
 {{ if or .IsPage .IsHome }}
 {{ partial "friends_script.html" . }}
 {{ end }}
+
+<!-- 实时时钟小部件 -->
+<script src="/function/realtime-clock.js"></script>
+
+<!-- 天气小部件（仅在首页和友链页显示） -->
+{{ if or .IsHome (eq .Title "友链") }}
+<script src="/function/weather-widget.js"></script>
+{{ end }}
+

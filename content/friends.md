@@ -5,6 +5,26 @@ draft: false
 description: "我的朋友们"
 ---
 
+<div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px; flex-wrap: wrap;">
+    <div style="display: flex; align-items: center; gap: 8px;">
+        <span style="font-size: 1.1rem; color: var(--primary);">📅</span>
+        <span id="current-time" style="font-size: 0.9rem; color: var(--text-color);">正在加载时间...</span>
+    </div>
+
+    <div id="weather-widget" class="weather-widget" style="display: flex; align-items: center; gap: 12px; padding: 8px 16px; border-radius: 8px;">
+        <div class="weather-icon" id="weather-icon" style="font-size: 1.4rem;">🌤️</div>
+        <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <span class="weather-location" id="weather-location" style="font-size: 0.85rem;">正在获取位置…</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px;">
+                <span class="weather-temp" id="weather-temp" style="font-weight: 700; color: var(--primary);">--°C</span>
+                <span class="weather-note" id="visitor-ip" style="font-size: 0.75rem; color: #7f8c8d;">IP: —</span>
+            </div>
+        </div>
+    </div>
+</div>
+
 ## 我的友友们
 
 <div class="friend-cards">
@@ -41,6 +61,38 @@ description: "我的朋友们"
     </div>
 </a>
 
+<a class="friend-card" href="https://www.feiyun123.cn/" target="_blank" rel="noopener noreferrer">
+    <div class="friend-header">
+        <img src="https://www.feiyun123.cn/avatar.png" alt="清羽飞扬" class="friend-avatar">
+        <div class="friend-info">
+            <h3 class="friend-name">清羽飞扬</h3>
+            <span class="friend-link">清羽飞扬的博客</span>
+        </div>
+    </div>
+    <p class="friend-desc">柳影曳曳，清酒孤灯 扬笔撒墨，心境如霜</p>
+    <div class="friend-tags">
+        <span class="friend-tag">个人博客</span>
+        <span class="friend-tag">阳光少年</span>
+        <span class="friend-tag">努力天使</span>
+    </div>
+</a>
+
+<a class="friend-card" href="https://www.emulatedlab.cn/" target="_blank" rel="noopener noreferrer">
+    <div class="friend-header">
+        <img src="https://www.emulatedlab.cn/wp-content/uploads/2023/01/cropped-EmulatedLab-Logo-1-32x32.png" alt="EmulatedLab" class="friend-avatar">
+        <div class="friend-info">
+            <h3 class="friend-name">EmulatedLab 论坛</h3>
+            <span class="friend-link">EmulatedLab官网</span>
+        </div>
+    </div>
+    <p class="friend-desc">EVE-NG中文区独家官方合作伙伴</p>
+    <div class="friend-tags">
+        <span class="friend-tag">网络仿真</span>
+        <span class="friend-tag">EVE-NG</span>
+        <span class="friend-tag">Hi168云平台</span>
+    </div>
+</a>
+
 <a class="friend-card" href="https://space.bilibili.com/3546554881280375" target="_blank" rel="noopener noreferrer">
     <div class="friend-header">
         <img src="/images/taomuyu.jpg" alt="桃木雨" class="friend-avatar">
@@ -72,6 +124,23 @@ description: "我的朋友们"
         <span class="friend-tag">粤语</span>
         <span class="friend-tag">弹唱</span>
         <span class="friend-tag">Bilibili UP</span>
+    </div>
+</a>
+
+<a class="friend-card" href="https://blog.ytblog.top/" target="_blank" rel="noopener noreferrer">
+    <div class="friend-header">
+        <img src="https://blog.ytblog.top/wp-content/uploads/2024/12/cropped-20241219102549622-32x32.jpg" alt="江浙沪第一甜妹" class="friend-avatar">
+        <div class="friend-info">
+            <h3 class="friend-name">江浙沪第一甜妹</h3>
+            <span class="friend-link">以墨传情，以文会友 · 甜妹的外表下藏着文艺的灵魂</span>
+        </div>
+    </div>
+    <p class="friend-desc">执笔写诗，落墨成画，在字里行间寻找生活的诗意</p>
+    <div class="friend-tags">
+        <span class="friend-tag">才女</span>
+        <span class="friend-tag">诗歌</span>
+        <span class="friend-tag">文学创作</span>
+        <span class="friend-tag">散文随笔</span>
     </div>
 </a>
 

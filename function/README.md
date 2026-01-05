@@ -2,6 +2,42 @@
 
 这个目录包含可复用的功能模块。
 
+## 实时时钟小部件
+
+一个轻量级的实时时间显示小部件。
+
+### 功能特性
+
+- ✅ 实时显示当前时间（每秒更新）
+- ✅ 中文格式化
+- ✅ 完全零依赖
+- ✅ 自动启动
+
+### 文件说明
+
+- `realtime-clock.js` - 实时时钟功能脚本
+- `weather-widget.js` - 天气小部件脚本
+- `weather-widget.css` - 天气小部件样式
+- `README.md` - 文档和使用指南
+
+### 快速开始
+
+#### 实时时钟
+
+1. 在 HTML 中添加容器：
+```html
+<span id="current-time"></span>
+```
+
+2. 在 `</body>` 前引入脚本：
+```html
+<script src="/function/realtime-clock.js"></script>
+```
+
+#### 天气小部件
+
+详见下方文档。
+
 ## 天气小部件
 
 一个轻量级的天气和 IP 定位小部件。
@@ -16,12 +52,6 @@
 - ✅ 完全零依赖
 - ✅ 响应式设计
 - ✅ 深色模式支持
-
-### 文件说明
-
-- `weather-widget.js` - 核心功能脚本
-- `weather-widget.css` - 样式文件
-- `weather-widget.html` - 使用示例
 
 ### 快速开始
 
@@ -85,6 +115,9 @@ const text = window.WeatherWidget.weatherCodeToText(0); // "晴朗"
 
 // 获取天气图标
 const emoji = window.WeatherWidget.weatherCodeToEmoji(0); // "☀️"
+
+// 刷新时钟
+window.RealTimeClock.refresh();
 ```
 
 ### 浏览器兼容性
@@ -96,7 +129,7 @@ const emoji = window.WeatherWidget.weatherCodeToEmoji(0); // "☀️"
 
 ### 隐私说明
 
-此小部件会：
+这些小部件会：
 - 向外部 API 发送请求以获取 IP 和天气数据
 - 可能请求浏览器地理定位权限（仅在 IP 定位失败时）
 
