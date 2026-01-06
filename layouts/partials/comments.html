@@ -1,153 +1,19 @@
 {{- if .Site.Params.comments -}}
 {{- if (or .Params.comments (and (not .Params.comments) .Site.Params.comments)) -}}
-<div id="tcomment"></div>
-<script src="https://cdn.staticfile.org/twikoo/1.6.41/twikoo.all.min.js"></script>
-<script>
-  try {
-    console.log('初始化 Twikoo 评论系统');
-    console.log('envId:', '{{ .Site.Params.twikoo.envId }}');
-
-    twikoo.init({
-      envId: '{{ .Site.Params.twikoo.envId }}',
-      el: '#tcomment',
-      lang: '{{ .Site.Params.twikoo.lang | default "zh-CN" }}',
-      onCommentLoaded: function () {
-        console.log('✅ Twikoo 评论加载完成');
-      }
-    });
-
-    console.log('Twikoo 初始化命令已执行');
-  } catch (error) {
-    console.error('❌ Twikoo 初始化失败:', error);
-    document.getElementById('tcomment').innerHTML =
-      '<p style="color: red; padding: 1rem; border: 1px solid red; border-radius: 4px;">评论系统加载失败，请刷新页面重试。错误信息：' + error.message + '</p>';
-  }
+<script src="https://giscus.app/client.js"
+        data-repo="{{ .Site.Params.giscus.repo }}"
+        data-repo-id="{{ .Site.Params.giscus.repoId }}"
+        data-category="{{ .Site.Params.giscus.category }}"
+        data-category-id="{{ .Site.Params.giscus.categoryId }}"
+        data-mapping="{{ .Site.Params.giscus.mapping }}"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="{{ .Site.Params.giscus.theme }}"
+        data-lang="{{ .Site.Params.giscus.lang }}"
+        crossorigin="anonymous"
+        async>
 </script>
-
-<style>
-  /* Twikoo 容器样式 */
-  #tcomment {
-    background-color: #ffffff;
-    padding: 1.5rem;
-    border-radius: 8px;
-    margin-top: 2rem;
-    border: 1px solid #e0e0e0;
-  }
-
-  /* 暗色模式适配 */
-  .dark #tcomment {
-    background-color: #1e1e1e;
-    border-color: #333333;
-  }
-
-  /* 评论输入框样式 */
-  .tk-input {
-    width: 100% !important;
-    padding: 10px !important;
-    border: 1px solid #d0d0d0 !important;
-    border-radius: 4px !important;
-    background-color: #ffffff !important;
-    color: #333333 !important;
-  }
-
-  .dark .tk-input {
-    border-color: #444444 !important;
-    background-color: #2a2a2a !important;
-    color: #e0e0e0 !important;
-  }
-
-  /* 提交按钮样式 */
-  .tk-submit {
-    background-color: #409EFF !important;
-    color: #ffffff !important;
-    padding: 10px 20px !important;
-    border: none !important;
-    border-radius: 4px !important;
-    cursor: pointer !important;
-    transition: all 0.3s ease !important;
-  }
-
-  .tk-submit:hover {
-    opacity: 0.9 !important;
-    transform: translateY(-1px) !important;
-  }
-
-  .tk-submit:hover {
-    opacity: 0.9 !important;
-    transform: translateY(-1px) !important;
-  }
-
-  /* 评论内容样式 */
-  .tk-content {
-    color: #333333 !important;
-    font-size: 1rem !important;
-    line-height: 1.6 !important;
-  }
-
-  .dark .tk-content {
-    color: #e0e0e0 !important;
-  }
-
-  /* 评论头部样式 */
-  .tk-nick {
-    color: #409EFF !important;
-    font-weight: 600 !important;
-  }
-
-  /* 时间戳样式 */
-  .tk-time {
-    color: #999999 !important;
-    font-size: 0.875rem !important;
-  }
-
-  /* 头像样式 */
-  .tk-avatar {
-    border-radius: 50% !important;
-    width: 40px !important;
-    height: 40px !important;
-  }
-
-  /* 评论区标题 */
-  .tk-comments-title {
-    font-size: 1.25rem !important;
-    font-weight: 600 !important;
-    margin-bottom: 1rem !important;
-    color: #333333 !important;
-  }
-
-  .dark .tk-comments-title {
-    color: #e0e0e0 !important;
-  }
-
-  /* 分隔线 */
-  .tk-divider {
-    border-color: #e0e0e0 !important;
-  }
-
-  .dark .tk-divider {
-    border-color: #333333 !important;
-  }
-
-  /* 操作按钮 */
-  .tk-action-link {
-    color: #409EFF !important;
-    text-decoration: none !important;
-  }
-
-  .tk-action-link:hover {
-    text-decoration: underline !important;
-  }
-
-  /* 加载动画 */
-  .tk-loading {
-    text-align: center !important;
-    padding: 2rem !important;
-    color: #666666 !important;
-  }
-
-  .dark .tk-loading {
-    color: #999999 !important;
-  }
-</style>
 {{- end -}}
 {{- end -}}
