@@ -1,4 +1,4 @@
-{{- if not .Site.IsServer -}}
+{{- if hugo.IsProduction -}}
   {{- with .Site.Config.Privacy.GoogleAnalytics -}}
     {{- if not .Disable -}}
       {{ if .Site.Config.Services.GoogleAnalytics.ID }}
