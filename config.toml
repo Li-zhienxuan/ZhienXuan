@@ -79,7 +79,7 @@ keywords = ["技术", "博客", "编程", "开发", "架构"]
 
   # 社交图标
   socialIcons = [
-    {name = "github", url = "https://github.com/https://github.com/Li-zhienxuan"},
+    {name = "github", url = "https://github.com/Li-zhienxuan"},
     {name = "cnb", url = "https://cnb.cool/u/cnb.Hajimi"},
     {name = "email", url = "mailto:hajimi.china@gmail.com"}
   ]
@@ -101,17 +101,12 @@ keywords = ["技术", "博客", "编程", "开发", "架构"]
     limit = 10
     keys = ["title", "permalink", "summary", "content"]
 
-  # Giscus 评论系统配置
-  # 访问 https://github.com/apps/giscus 获取配置参数
-  [params.giscus]
-    repo = "yourusername/yourrepo"
-    repoId = "your-repo-id"
-    category = "Announcements"
-    categoryId = "your-category-id"
-    theme = "preferred_color_scheme"
-    mapping = "pathname"
-    reactionsEnabled = 1
-    emitMetadata = 0
+  # Twikoo 评论系统配置
+  # 部署教程：https://vercel.com/new/clone?repository=https://github.com/twikoojs/twikoo
+  [params.twikoo]
+    envId = "https://your-twikoo.vercel.app"  # 替换为你的 Twikoo 服务地址
+    region = ""                                 # 留空即可
+    lang = "zh-CN"                              # 语言设置
 
   # Google Analytics（可选）
   [params.analytics.google]

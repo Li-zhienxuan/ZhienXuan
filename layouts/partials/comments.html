@@ -1,0 +1,113 @@
+{{- if .Site.Params.comments -}}
+{{- if (or .Params.comments (and (not .Params.comments) .Site.Params.comments)) -}}
+<div id="tcomment"></div>
+<script src="https://cdn.staticfile.org/twikoo/1.6.41/twikoo.all.min.js"></script>
+<script>
+  twikoo.init({
+    envId: '{{ .Site.Params.twikoo.envId }}',
+    el: '#tcomment',
+    lang: '{{ .Site.Params.twikoo.lang | default "zh-CN" }}',
+    onCommentLoaded: function () {
+      console.log('Twikoo 评论加载完成');
+    }
+  })
+</script>
+
+<style>
+  /* Twikoo 容器样式 */
+  #tcomment {
+    background-color: var(--background);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-top: 2rem;
+  }
+
+  /* 暗色模式适配 */
+  .dark #tcomment {
+    background-color: var(--entry-bg);
+  }
+
+  /* 评论输入框样式 */
+  .tk-input {
+    width: 100% !important;
+    padding: 10px !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 4px !important;
+    background-color: var(--background) !important;
+    color: var(--content) !important;
+  }
+
+  /* 提交按钮样式 */
+  .tk-submit {
+    background-color: var(--primary) !important;
+    color: var(--entry-content-hr) !important;
+    padding: 10px 20px !important;
+    border: none !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+  }
+
+  .tk-submit:hover {
+    opacity: 0.9 !important;
+    transform: translateY(-1px) !important;
+  }
+
+  /* 评论内容样式 */
+  .tk-content {
+    color: var(--content) !important;
+    font-size: 1rem !important;
+    line-height: 1.6 !important;
+  }
+
+  /* 评论头部样式 */
+  .tk-nick {
+    color: var(--primary) !important;
+    font-weight: 600 !important;
+  }
+
+  /* 时间戳样式 */
+  .tk-time {
+    color: var(--primary) !important;
+    font-size: 0.875rem !important;
+  }
+
+  /* 头像样式 */
+  .tk-avatar {
+    border-radius: 50% !important;
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  /* 评论区标题 */
+  .tk-comments-title {
+    font-size: 1.25rem !important;
+    font-weight: 600 !important;
+    margin-bottom: 1rem !important;
+    color: var(--content) !important;
+  }
+
+  /* 分隔线 */
+  .tk-divider {
+    border-color: var(--border) !important;
+  }
+
+  /* 操作按钮 */
+  .tk-action-link {
+    color: var(--primary) !important;
+    text-decoration: none !important;
+  }
+
+  .tk-action-link:hover {
+    text-decoration: underline !important;
+  }
+
+  /* 加载动画 */
+  .tk-loading {
+    text-align: center !important;
+    padding: 2rem !important;
+    color: var(--primary) !important;
+  }
+</style>
+{{- end -}}
+{{- end -}}
