@@ -102,11 +102,11 @@ keywords = ["技术", "博客", "编程", "开发", "架构"]
     keys = ["title", "permalink", "summary", "content"]
 
   # Twikoo 评论系统配置
-  # 部署教程：https://vercel.com/new/clone?repository=https://github.com/twikoojs/twikoo
+  # 部署地址：https://twikoo-zhienxuan.vercel.app
   [params.twikoo]
-    envId = "https://your-twikoo.vercel.app"  # 替换为你的 Twikoo 服务地址
-    region = ""                                 # 留空即可
-    lang = "zh-CN"                              # 语言设置
+    envId = "https://twikoo-zhienxuan.vercel.app"
+    region = ""
+    lang = "zh-CN"
 
   # Google Analytics（可选）
   [params.analytics.google]
