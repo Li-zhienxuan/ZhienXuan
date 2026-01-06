@@ -9,6 +9,8 @@ series: ["博客搭建"]
 series_order: 2
 ---
 
+{{< site_info_bar >}}
+
 ## Hugo 简介
 
 Hugo 是一个用 Go 语言编写的静态站点生成器，具有以下特点：
