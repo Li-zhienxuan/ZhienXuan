@@ -9,8 +9,6 @@ series: ["博客搭建"]
 series_order: 1
 ---
 
-{{< site_info_bar >}}
-
 ## 欢迎使用 Hugo + PaperMod
 
 欢迎访问我的技术博客！这是一个基于 Hugo 静态站点生成器和 PaperMod 主题构建的个人博客。
