@@ -12,15 +12,10 @@ author = "ZhienXuan"
 description = "专注于技术文章与知识沉淀"
 keywords = ["技术", "博客", "编程", "开发", "架构"]
 
-# 多语言
+# 多语言（仅使用中文）
 [languages.zh]
   languageName = "中文"
   weight = 1
-  languagedirection = "ltr"
-
-[languages.en]
-  languageName = "English"
-  weight = 2
   languagedirection = "ltr"
 
 # 菜单
@@ -91,9 +86,11 @@ keywords = ["技术", "博客", "编程", "开发", "架构"]
 
   # 首页信息模式
   [params.homeInfoParams]
-    Title = "你好 👋"
+    Title = "你好呀，这里是哈基米的个人站"
     Content = """
-      欢迎来到我的技术博客，这里是哈基米的个人站，分享技术，热爱生活。
+      这里是哈基米的个人站，分享技术，热爱生活。
+
+      我是一名热爱技术的开发者，专注于软件架构设计、全栈开发和云原生技术。
       """
 
   # Fuse.js 搜索配置（本地搜索，无外部依赖）
