@@ -10,7 +10,7 @@
             <span id="weather-location">定位中...</span>
             <span id="weather-desc"></span>
             <span id="weather-temp">--°C</span>
-            <span id="visitor-ip" class="ip-display">IP: 检测中</span>
+            <span id="visitor-ip" class="ip-display">IP: [鼠标悬停显示]</span>
         </div>
     </div>
 </div>
@@ -56,6 +56,8 @@
         return;
     }
 
+    let realIp = null;
+
     const timeout = (ms) => new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), ms));
     const fetchJSON = (url, ms = 6000) => Promise.race([
         fetch(url).then(r => r.ok ? r.json() : Promise.reject(r)),
@@ -63,29 +65,34 @@
     ]);
 
     function weatherCodeToText(code) {
-        if (code === 0) return '晴朗';
-        if (code <= 3) return '多云';
-        if (code === 45 || code === 48) return '雾';
-        if (code >= 51 && code <= 67) return '小雨';
-        if (code >= 71 && code <= 77) return '小雪';
-        if (code >= 80 && code <= 82) return '阵雨';
-        if (code >= 95) return '雷暴';
-        return '多变';
+        const codes = {
+            0: '晴朗', 1: '晴朗', 2: '晴朗', 3: '多云',
+            45: '雾', 48: '雾',
+            51: '小雨', 53: '小雨', 55: '小雨',
+            61: '小雨', 63: '小雨', 65: '小雨',
+            71: '小雪', 73: '小雪', 75: '小雪', 77: '小雪',
+            80: '阵雨', 81: '阵雨', 82: '阵雨',
+            95: '雷暴', 96: '雷暴', 99: '雷暴'
+        };
+        return codes[code] || '天气多变';
     }
 
     function weatherCodeToEmoji(code) {
-        if (code === 0) return '☀️';
-        if (code <= 3) return '⛅';
-        if (code === 45 || code === 48) return '🌫️';
-        if (code >= 51 && code <= 67) return '🌧️';
-        if (code >= 71 && code <= 77) return '❄️';
-        if (code >= 80 && code <= 82) return '🌦️';
-        if (code >= 95) return '⚡';
-        return '🌤️';
+        const emojis = {
+            0: '☀️', 1: '☀️', 2: '☀️', 3: '⛅',
+            45: '🌫️', 48: '🌫️',
+            51: '🌧️', 53: '🌧️', 55: '🌧️',
+            61: '🌧️', 63: '🌧️', 65: '🌧️',
+            71: '❄️', 73: '❄️', 75: '❄️', 77: '❄️',
+            80: '🌦️', 81: '🌦️', 82: '🌦️',
+            95: '⛈️', 96: '⛈️', 99: '⛈️'
+        };
+        return emojis[code] || '🌤️';
     }
 
     async function getIpData() {
         const services = [
+            'https://api.ip.sb/geoip',
             'https://ipapi.co/json/',
             'https://ipwho.is/json/'
         ];
@@ -93,32 +100,58 @@
         for (const url of services) {
             try {
                 const d = await fetchJSON(url, 6000);
-                if (d && (d.ip || d.success === true || d.ip_address)) {
-                    return d;
+                if (d && (d.ip || d.ip_address || d.query)) {
+                    console.log(`成功从 ${url} 获取IP数据`);
+                    return {
+                        ip: d.ip || d.ip_address || d.query,
+                        city: d.city || '',
+                        region: d.region || d.regionName || '',
+                        country: d.country || d.country_name || d.countryCode || '',
+                        lat: d.latitude ?? d.lat,
+                        lon: d.longitude ?? d.lon
+                    };
                 }
             } catch (e) {
-                console.warn(`IP service ${url} failed`);
+                console.warn(`IP服务 ${url} 失败`);
             }
         }
         return null;
     }
 
-    async function getCoordsViaGeolocation() {
-        if (!navigator.geolocation) {
-            return null;
+    function updateIpDisplay(data) {
+        const ip = data.ip || '—';
+        realIp = ip;
+
+        if (ipEl) {
+            ipEl.textContent = 'IP: [鼠标悬停显示]';
+            ipEl.style.cursor = 'pointer';
+            ipEl.title = '点击或悬停查看IP';
+
+            ipEl.addEventListener('mouseenter', () => {
+                ipEl.textContent = `IP: ${ip}`;
+            });
+
+            ipEl.addEventListener('mouseleave', () => {
+                ipEl.textContent = 'IP: [鼠标悬停显示]';
+            });
+
+            ipEl.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (ipEl.textContent.includes('悬停显示')) {
+                    ipEl.textContent = `IP: ${ip}`;
+                } else {
+                    ipEl.textContent = 'IP: [鼠标悬停显示]';
+                }
+            });
         }
 
-        return new Promise((resolve) => {
-            const done = (pos) => resolve({
-                latitude: pos.coords.latitude,
-                longitude: pos.coords.longitude
-            });
-            const fail = () => resolve(null);
-            navigator.geolocation.getCurrentPosition(done, fail, {
-                maximumAge: 600000,
-                timeout: 8000
-            });
-        });
+        const city = data.city || '';
+        const region = data.region || data.regionName || '';
+        const country = data.country_name || data.country || data.countryCode || '';
+        const location = [city, region, country].filter(Boolean).join(' · ') || '未知位置';
+        if (locEl) {
+            locEl.textContent = location;
+        }
     }
 
     async function init() {
@@ -127,32 +160,18 @@
             let lat = null, lon = null;
 
             if (data) {
-                const ip = data.ip || data.ip_address || '—';
-                if (ipEl) ipEl.textContent = `IP: ${ip}`;
-
-                const city = data.city || '';
-                const region = data.region || data.regionName || '';
-                const country = data.country_name || data.country || data.countryCode || '';
-                if (locEl) {
-                    locEl.textContent = [city, region, country].filter(Boolean).join(' · ') || '未知位置';
-                }
-
-                lat = data.latitude ?? data.lat;
-                lon = data.longitude ?? data.lon;
+                updateIpDisplay(data);
+                lat = data.lat;
+                lon = data.lon;
             } else {
-                if (ipEl) ipEl.textContent = 'IP: 无法获取';
-                if (locEl) locEl.textContent = '定位中…';
-            }
-
-            if (lat == null || lon == null) {
-                const geo = await getCoordsViaGeolocation();
-                if (geo) {
-                    lat = geo.latitude;
-                    lon = geo.longitude;
-                    if (locEl && (!locEl.textContent || locEl.textContent === '定位中…')) {
-                        locEl.textContent = '浏览器定位';
-                    }
+                if (ipEl) {
+                    ipEl.textContent = 'IP: 无法获取';
                 }
+                if (locEl) {
+                    locEl.textContent = '默认位置';
+                }
+                lat = 31.2304;
+                lon = 121.4737;
             }
 
             if (lat != null && lon != null) {
@@ -240,6 +259,12 @@
     color: #7f8c8d;
     padding-left: 12px;
     border-left: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.ip-display:hover {
+    color: var(--primary);
 }
 
 @media (max-width: 768px) {
