@@ -101,15 +101,11 @@ keywords = ["技术", "博客", "编程", "开发", "架构"]
     limit = 10
     keys = ["title", "permalink", "summary", "content"]
 
-  # Giscus 评论系统配置
-  # 访问 https://github.com/apps/giscus 获取配置参数
-  [params.giscus]
-    repo = "Li-zhienxuan/ZhienXuan"
-    repoId = "R_kgDOQ0AtsA"
-    category = "Announcements"
-    categoryId = "DIC_kwDOQ0AtsM4C0o9v"
-    theme = "preferred_color_scheme"
-    mapping = "pathname"
+  # Twikoo 评论系统配置
+  # MongoDB 数据库已配置
+  [params.twikoo]
+    envId = "https://twikoo-zhienxuan.vercel.app"
+    region = ""
     lang = "zh-CN"
 
   # Google Analytics（可选）
