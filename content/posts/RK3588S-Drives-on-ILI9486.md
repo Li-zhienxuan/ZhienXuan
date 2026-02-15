@@ -1,6 +1,6 @@
 ---
 title: "基于瑞芯微RK3588S平台的ILI9486 SPI显示屏子系统"
-date: 2026年02月14日 00:05:40
+date: 2026-02-14T00:05:40+08:00
 draft: false
 description: "这是第一篇文章，介绍博客的技术栈和功能特性"
 categories: ["博客"]
